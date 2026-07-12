@@ -1,0 +1,313 @@
+weights:
+  exact_keyword_match: 5
+  multi_word_phrase_match: 8
+  technology_match: 6
+  skill_match: 5
+  domain_match: 4
+  profile_match: 6
+  semantic_evidence_match: 7
+  priority_evidence_match: 12
+  evidence_level_strong: 5
+  evidence_level_moderate: 3
+  evidence_level_emerging: 1
+  source_recency: 2
+penalties:
+  broad_parent_node: -10
+  low_relevance_domain: -4
+  too_many_siblings: -5
+  older_role_overuse: -4
+evidence_levels:
+  strong:
+  - high
+  - multi source normalized
+  - multi_source_normalized
+  - source backed
+  - source_backed
+  - strong
+  - verified
+  moderate:
+  - medium
+  - moderate
+  - needs_review
+  emerging:
+  - emerging
+  - low
+  - placeholder
+source_recency:
+  recent_prefixes: []
+  older_prefixes: []
+token_stopwords:
+- a
+- an
+- and
+- as
+- at
+- by
+- for
+- from
+- in
+- of
+- 'on'
+- or
+- the
+- to
+- with
+semantic_evidence_groups:
+  developer_experience:
+    label: Developer Experience
+    job_terms:
+    - developer experience
+    - developer tooling
+    - developer tools
+    - internal ai tools
+    - internal tools
+    - move faster
+    - productivity
+    - tools
+    bullet_terms:
+    - ci/cd
+    - cicd
+    - developer experience
+    - developer tooling
+    - internal support
+    - playwright
+    - qa
+    - slack
+    - testing
+    - workflow integrations
+  internal_ai_tools:
+    label: Internal AI Tools
+    job_terms:
+    - adoption
+    - ai productivity
+    - code review support
+    - efficiency agents
+    - internal ai tooling
+    - internal ai tools
+    - internal chatbot
+    - internal chatbots
+    - meeting summaries
+    - requirements generation
+    - reusable tools
+    - rfp
+    - rfq
+    bullet_terms:
+    - ai workflows
+    - ci/cd
+    - cross functional
+    - developer experience
+    - developer tooling
+    - playwright
+    - qa
+    - requirements
+    - slack
+    - stakeholder
+    - support assistant
+    - workflow
+    - workflow automation
+  production_ai:
+    label: Production AI
+    job_terms:
+    - ai features
+    - ai workflows
+    - deployed features
+    - generative ai
+    - member-facing features
+    - production
+    - production APIs
+    - production ai
+    - ship
+    - shipping
+    bullet_terms:
+    - agent based systems
+    - ai workflows
+    - applied ai
+    - llm systems
+    - production
+    - production behavior
+  backend_services:
+    label: Backend Services
+    job_terms:
+    - api
+    - apis
+    - backend
+    - backend development
+    - backend services
+    - infrastructure
+    - restful api design
+    - services
+    - software solutions
+    bullet_terms:
+    - api
+    - apis
+    - backend
+    - fastapi
+    - notion api
+    - pipeline
+    - pipelines
+    - product engineering
+    - rest apis
+    - services
+    - sqlite
+    - telegram bot api
+  reliability_system_health:
+    label: Reliability / System Health
+    job_terms:
+    - deployed features
+    - high-quality code
+    - monitoring
+    - monitoring systems
+    - observability
+    - reliability
+    - reliable
+    - stability
+    - system health
+    - system stability
+    bullet_terms:
+    - ci/cd
+    - cicd
+    - dashboard
+    - deployment stability
+    - guardrails
+    - playwright
+    - production behavior
+    - qa
+    - quality assurance
+    - reliability
+    - report generation
+    - testing
+    - tests
+  async_processing:
+    label: Asynchronous Processing
+    job_terms:
+    - asynchronous processing
+    - event driven
+    - event-driven
+    - kafka
+    - processing systems
+    - sqs
+    bullet_terms:
+    - automation
+    - event driven
+    - event-driven
+    - ingestion pipelines
+    - pipelines
+    - workflow systems
+  infrastructure_platform:
+    label: Platform Infrastructure
+    job_terms:
+    - ai platform
+    - infrastructure
+    - large-scale
+    - platform
+    - scalable
+    - scalable system design
+    bullet_terms:
+    - architecture
+    - canonical local store
+    - deployment stability
+    - enterprise ai platform
+    - infrastructure
+    - kubernetes
+    - modular
+    - platform
+    - sqlite
+  retrieval_systems:
+    label: Retrieval Systems
+    job_terms:
+    - grounded retrieval
+    - hybrid retrieval
+    - retrieval
+    - retrieval systems
+    - semantic search
+    bullet_terms:
+    - hybrid retrieval
+    - llm answer generation
+    - rag
+    - retrieval
+    - semantic search
+  ambiguous_builder:
+    label: Ambiguous Builder
+    job_terms:
+    - ambiguous problems
+    - bias for action
+    - prototype fast
+    - rapid prototyping
+    - startup
+    - vague problems
+    bullet_terms:
+    - ambiguous
+    - cross functional
+    - prototype
+    - rapid
+    - requirements
+    - special projects
+    - startup
+  decision_support:
+    label: Decision Support
+    job_terms:
+    - decision-making
+    - diagnoses
+    - health outcomes
+    - monitoring
+    - performance optimization
+    - personalized insights
+    - recommend
+    - recommendations
+    - reports
+    bullet_terms:
+    - auditable
+    - dashboard
+    - decision support
+    - feedback loops
+    - readiness
+    - recommendations
+  health_performance_data:
+    label: Health Performance Data
+    job_terms:
+    - fitness
+    - health
+    - healthspan
+    - heart rate variability
+    - human performance
+    - personalized insights
+    - physiological metrics
+    - recovery
+    - resting heart rate
+    - sleep quality
+    - wearable
+    bullet_terms:
+    - apple health
+    - apple watch
+    - health data modeling
+    - health technology
+    - hrv
+    - human performance
+    - readiness
+    - recovery
+    - resting heart rate
+    - sleep
+    - training
+    - wearable data
+  user_pain:
+    label: Solving User Pain
+    job_terms:
+    - adoption
+    - customer
+    - customers
+    - feedback
+    - pain points
+    - seamless user experience
+    - support
+    - unmet needs
+    - user
+    - users
+    bullet_terms:
+    - customer
+    - enterprise support
+    - requirements
+    - slack
+    - support
+    - usable
+    - users
+    - workflow

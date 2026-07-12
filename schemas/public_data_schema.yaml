@@ -1,0 +1,352 @@
+schema_id: career_intelligence_public_data_v1
+description: Public-safe schema for Career Intelligence templates and synthetic datasets.
+record_types:
+  identity:
+    collection: identity
+    required:
+      - id
+      - display_name
+      - location
+      - headline
+      - contact
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      display_name: string
+      location: string
+      headline: string
+      contact: map
+      links: list
+      differentiators: list
+      anti_positioning: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  experience:
+    collection: experience
+    required:
+      - id
+      - organization
+      - title
+      - start_date
+      - end_date
+      - location
+      - summary
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      organization: string
+      title: string
+      start_date: string
+      end_date: string
+      location: string
+      summary: string
+      skill_ids: list
+      accomplishment_ids: list
+      project_ids: list
+      evidence_ids: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  accomplishment:
+    collection: accomplishments
+    required:
+      - id
+      - statement
+      - experience_id
+      - evidence_ids
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      statement: string
+      experience_id: ref:experience
+      project_ids: list
+      skill_ids: list
+      evidence_ids: list
+      metrics: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  resume_bullet:
+    collection: resume_bullets
+    required:
+      - id
+      - text
+      - source_id
+      - source_type
+      - evidence_ids
+      - evidence_status
+      - confidence
+      - usage_cautions
+      - safe_for
+    fields:
+      id: string
+      text: string
+      source_id: string
+      source_type: enum:source_type
+      skill_ids: list
+      evidence_ids: list
+      tags: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+      safe_for: list
+  project:
+    collection: projects
+    required:
+      - id
+      - name
+      - description
+      - visibility
+      - evidence_ids
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      name: string
+      description: string
+      visibility: enum:visibility
+      skill_ids: list
+      accomplishment_ids: list
+      evidence_ids: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  skill:
+    collection: skills
+    required:
+      - id
+      - name
+      - category
+      - evidence_ids
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      name: string
+      category: string
+      evidence_ids: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  story:
+    collection: stories
+    required:
+      - id
+      - title
+      - situation
+      - task
+      - action
+      - result
+      - evidence_ids
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      title: string
+      situation: string
+      task: string
+      action: string
+      result: string
+      related_accomplishment_ids: list
+      evidence_ids: list
+      useful_for_questions: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  value:
+    collection: values
+    required:
+      - id
+      - label
+      - statement
+      - evidence_ids
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      label: string
+      statement: string
+      evidence_ids: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  interest:
+    collection: interests
+    required:
+      - id
+      - label
+      - statement
+      - evidence_ids
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      label: string
+      statement: string
+      evidence_ids: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  person_claim:
+    collection: person_claims
+    required:
+      - id
+      - label
+      - statement
+      - category
+      - evidence
+      - evidence_status
+      - confidence
+      - safe_for
+      - caution_for
+      - usage_cautions
+    fields:
+      id: string
+      label: string
+      statement: string
+      category: string
+      evidence: list
+      related_accomplishments: list
+      related_projects: list
+      related_stories: list
+      supports_target_roles: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      safe_for: list
+      caution_for: list
+      usage_cautions: list
+  evidence_record:
+    collection: evidence_records
+    required:
+      - id
+      - type
+      - source
+      - description
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      type: enum:evidence_type
+      source: string
+      source_ref: string
+      description: string
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  resume_profile:
+    collection: resume_profiles
+    required:
+      - id
+      - label
+      - target_roles
+      - preferred_skill_categories
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      label: string
+      target_roles: list
+      preferred_skill_categories: list
+      preferred_bullet_categories: list
+      preferred_domains: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  job_description_metadata:
+    collection: job_description_metadata
+    required:
+      - id
+      - role_title
+      - organization_label
+      - source_type
+      - description_status
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      id: string
+      role_title: string
+      organization_label: string
+      source_type: enum:job_source_type
+      description_status: enum:description_status
+      keyword_ids: list
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+  project_visibility:
+    collection: project_visibility
+    required:
+      - project_id
+      - visibility
+      - rationale
+      - evidence_status
+      - confidence
+      - usage_cautions
+    fields:
+      project_id: ref:project
+      visibility: enum:visibility
+      rationale: string
+      evidence_status: enum:evidence_status
+      confidence: enum:confidence
+      usage_cautions: list
+enums:
+  confidence:
+    - high
+    - medium
+    - low
+  description_status:
+    - synthetic
+    - source_backed
+    - needs_review
+  evidence_status:
+    - verified
+    - source_backed
+    - synthetic
+    - reflection_only
+    - ambiguous
+    - conflicting
+    - needs_review
+  evidence_type:
+    - work_artifact
+    - public_artifact
+    - interview_recollection
+    - reflection
+    - synthetic_fixture
+  job_source_type:
+    - synthetic
+    - public_posting
+    - internal_notes
+  source_type:
+    - experience
+    - project
+    - accomplishment
+    - story
+  visibility:
+    - public
+    - private
+    - synthetic
+reference_fields:
+  accomplishment_ids: accomplishments
+  evidence_ids: evidence_records
+  experience_id: experience
+  project_id: projects
+  project_ids: projects
+  related_accomplishment_ids: accomplishments
+  related_accomplishments: accomplishments
+  related_projects: projects
+  related_stories: stories
+  skill_ids: skills

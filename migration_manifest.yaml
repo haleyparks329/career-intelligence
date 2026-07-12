@@ -1,0 +1,63 @@
+# Public migration manifest
+#
+# This file intentionally summarizes migration decisions without listing private
+# source paths, private employers, private application targets, or private
+# generated artifacts.
+
+status: public_safe_summary
+source_detail_policy: omitted_from_public_repository
+
+included_categories:
+  - category: public_engine
+    description: Generic framework code copied or rewritten for public use.
+    examples:
+      - src/select_bullets.py
+      - src/match.py
+      - src/person_model.py
+      - src/demo.py
+  - category: public_configuration
+    description: Default scoring, reasoning, and visualization configuration without private identifiers.
+    examples:
+      - config/defaults/scoring.yaml
+      - config/defaults/reasoning_rules.yaml
+      - config/defaults/visualization.yaml
+  - category: public_schema
+    description: Schema and template files for synthetic career data.
+    examples:
+      - schemas/public_data_schema.yaml
+      - templates/public_data_template.yaml
+  - category: synthetic_example
+    description: Fully fictional Andy Barks dataset and generated demo artifacts.
+    examples:
+      - examples/andy-barks/data.yaml
+      - examples/andy-barks/generated/match_report.md
+      - examples/andy-barks/generated/resume.md
+  - category: public_documentation
+    description: Public README and docs written without private implementation details.
+    examples:
+      - README.md
+      - docs/architecture.md
+      - docs/privacy-boundaries.md
+
+excluded_categories:
+  - category: private_career_data
+    description: Real career model records, identity data, accomplishments, stories, values, and rendering data.
+    public_action: excluded
+  - category: private_application_materials
+    description: Real job descriptions, application notes, generated resumes, ATS reports, and interview materials.
+    public_action: excluded
+  - category: private_configuration
+    description: Local settings, private paths, credentials, and private calibration files.
+    public_action: excluded
+  - category: private_visual_exports
+    description: Graphs, design exports, and visual artifacts derived from real private data.
+    public_action: excluded
+  - category: private_git_history
+    description: Existing private repository history and branches.
+    public_action: excluded
+
+validation_policy:
+  - The public repository must run without private source repository access.
+  - The public repository must use synthetic example data only.
+  - Privacy scans must fail on private paths, known private identifiers, phone numbers, email addresses, prohibited private directories, and unexpected generated career outputs outside approved synthetic paths.
+  - Detailed private denylist values should remain outside this public repository when they contain sensitive information.
