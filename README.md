@@ -1,150 +1,353 @@
 # Career Intelligence
 
-> Model the person, not just the job description.
+> **Model the person, not just the job description.**
 
-Career Intelligence is a public-safe framework for source-backed career reasoning. It separates evidence, role matching, person-model reasoning, and generated career materials so that resumes and interview prep stay grounded in what the data can actually support.
+Career Intelligence is a local-first framework for representing a career as structured, source-backed evidence and reasoning over it without inventing experience.
 
-This repository currently contains a reusable engine slice, public schemas, default configuration, and a fully synthetic example persona named Andy Barks.
+Instead of treating a resume as the source of truth, the framework separates:
 
-## What Career Intelligence Is
+- what a person has actually done
+- what evidence supports each claim
+- which skills transfer across roles
+- how capability fit differs from person and environment fit
+- what is safe to emphasize
+- what should not be overstated
 
-Career Intelligence helps reason about fit between a person and a role. It can compare target-role requirements to evidence-backed accomplishments, surface transferable skills, preserve caveats, and generate demo outputs such as match reports, resumes, positioning notes, interview prep, and a small visualization.
+Resumes, match reports, positioning notes, interview preparation, and visualizations become explainable views over the same underlying career model.
 
-The framework is intentionally conservative. It treats career material as evidence-sensitive, not as generic marketing copy.
+This repository contains a reusable engine slice, public schemas and templates, default configuration, validation tooling, and a fully synthetic example persona named **Andy Barks**.
 
-## Core Philosophy
+## Why This Exists
 
-- Evidence first: generated claims should trace back to source records.
-- Person model second: work style, values, and positioning can guide reasoning, but should not become resume claims without enough evidence.
-- Gaps stay visible: missing or weak evidence should remain explicit.
-- Synthetic examples stay synthetic: public demos should not expose or paraphrase a real private career model.
+Most job-search tools begin with a job description and ask how closely a candidate can be rewritten to match it.
 
-See [docs/philosophy.md](docs/philosophy.md).
+Career Intelligence starts somewhere else:
 
-## Architecture
+> What is true about this person, what supports it, and how should that truth be represented for this opportunity?
 
-The current public slice includes:
+That distinction matters for career changers, nonlinear careers, people whose strongest work never made it onto a resume, and anyone who wants useful automation without turning inference into fiction.
 
-- `examples/andy-barks/data.yaml`: synthetic career dataset.
-- `schemas/public_data_schema.yaml`: public data model schema.
-- `templates/public_data_template.yaml`: starter data template.
-- `src/select_bullets.py`: source-backed evidence ranking.
-- `src/match.py`: role match analysis.
-- `src/position.py`: positioning analysis.
-- `src/prep.py`: interview prep analysis.
-- `src/render_resume.py`: conservative resume rendering helpers.
-- `src/demo.py`: deterministic synthetic demo workflow.
+## Core Principles
 
-See [docs/architecture.md](docs/architecture.md).
+- **Evidence before language.** Generated claims should trace back to source records.
+- **Facts and wording stay separate.** Accomplishments are career evidence; resume bullets are reusable representations of that evidence.
+- **Capability fit and person fit are different questions.** A person may be able to do a role without thriving in its environment.
+- **Transferable skills matter.** Job titles are evidence, not the whole model.
+- **Uncertainty stays visible.** Reflection, conflicting evidence, gaps, confidence, and usage cautions are first-class data.
+- **Person-model claims have boundaries.** Work style and preferences can support reasoning, but they must not silently become credentials or accomplishments.
+- **Human review remains necessary.** The system helps organize and reason over evidence; it does not replace judgment.
 
-## Installation
+Read more in [docs/philosophy.md](docs/philosophy.md).
 
-Use Python 3.10 or newer.
+## How It Works
 
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -e '.[dev]'
+```text
+Acquire
+  ↓
+Normalize
+  ↓
+Review
+  ↓
+Reason
+  ↓
+Generate
+  ↓
+Visualize
 ```
+
+Career information may come from resumes, interviews, project notes, portfolios, LinkedIn exports, performance reviews, Git history, or other user-provided sources. The public repository currently focuses on the normalized model, reasoning layer, generated outputs, and safety boundaries.
+
+```text
+Source records
+    ↓
+Evidence-backed career model
+    ├── identity
+    ├── experience
+    ├── accomplishments
+    ├── projects
+    ├── skills
+    ├── stories
+    ├── values and interests
+    └── person-model claims
+          ↓
+Reasoning
+    ├── capability fit
+    ├── transferable skills
+    ├── person and environment fit
+    ├── evidence gaps
+    ├── positioning
+    └── interview preparation
+          ↓
+Generated views
+    ├── match report
+    ├── resume
+    ├── positioning notes
+    ├── interview prep
+    └── visualization
+```
+
+See [docs/architecture.md](docs/architecture.md) and [docs/acquisition-workflow.md](docs/acquisition-workflow.md).
 
 ## Quick Start
 
-Run the test suite:
+Career Intelligence requires Python 3.10 or newer.
 
 ```bash
-make test
+git clone https://github.com/haleyparks329/career-intelligence.git
+cd career-intelligence
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[dev]'
+make validate
 ```
 
-Run the synthetic demo:
+`make validate` runs the complete public validation suite:
+
+- privacy scan
+- schema validation
+- Markdown link validation
+- dependency check
+- test suite
+- synthetic demo generation
+
+Run only the demo with:
 
 ```bash
 make demo
 ```
 
-Demo outputs are written to:
+Generated demo outputs are written to:
 
 ```text
 examples/andy-barks/generated/
 ```
 
-## Synthetic Example
+## Meet Andy Barks
 
-Andy Barks is a completely fictional curriculum designer and library educator. The dataset includes fictional employers, dates, projects, accomplishments, claims, caveats, and generated outputs.
+Andy Barks is a completely fictional example used to demonstrate the framework without exposing or paraphrasing a real person's private career model.
 
-The synthetic example is designed to exercise:
+His synthetic career moves through library services, education, and curriculum design:
 
-- high-confidence evidence-backed claims
-- reflection-only claims
+```text
+Library Assistant
+    ↓
+Public Librarian
+    ↓
+School Librarian
+    ↓
+Middle School Teacher
+    ↓
+Curriculum Designer
+```
+
+Andy is intentionally not a software engineer. His example demonstrates that Career Intelligence can reason about:
+
+- nonlinear careers
+- transferable skills across different job titles
+- library and education work
+- evidence-backed accomplishments
+- reflection-only person claims
 - conflicting evidence
-- resume-prohibited person-model claims
-- weak skill gaps
 - strong and partial role matches
-- transferable skills that matter more than job titles
+- claims prohibited from resume generation
+- small AI-assisted tools built by a non-software professional
+
+Start with [`examples/andy-barks/data.yaml`](examples/andy-barks/data.yaml).
+
+## What the Demo Produces
+
+The deterministic demo generates:
+
+- a role-match analysis
+- capability-fit and person-fit views
+- selected evidence-backed resume bullets
+- positioning guidance
+- interview-preparation notes
+- usage caveats and risk flags
+- a small career visualization
+
+A generated output can distinguish between concepts such as:
+
+```text
+verified evidence
+reflection or recollection
+strong and weak evidence
+genuine gaps
+safe to emphasize
+do not overstate
+resume-safe claims
+resume-prohibited claims
+```
+
+The goal is not merely to produce polished copy. The goal is to preserve the reasoning behind it.
+
+## Repository Map
+
+```text
+career-intelligence/
+├── config/                       # public default reasoning configuration
+├── docs/                         # architecture, safety, workflow, and data-model guides
+├── examples/andy-barks/          # fully synthetic example career model
+├── schemas/                      # public schema definitions
+├── scripts/                      # validation and privacy helpers
+├── src/                          # generic reasoning and generation engine
+├── templates/                    # starter public data templates
+├── tests/                        # deterministic test suite
+├── visuals/                      # public visualization helpers
+├── Makefile
+└── pyproject.toml
+```
+
+Key implementation files include:
+
+- [`src/select_bullets.py`](src/select_bullets.py) — source-backed evidence ranking
+- [`src/match.py`](src/match.py) — capability and role-match analysis
+- [`src/position.py`](src/position.py) — evidence-aware positioning
+- [`src/prep.py`](src/prep.py) — interview-preparation analysis
+- [`src/render_resume.py`](src/render_resume.py) — conservative resume rendering
+- [`src/demo.py`](src/demo.py) — deterministic synthetic workflow
+- [`schemas/public_data_schema.yaml`](schemas/public_data_schema.yaml) — public data schema
+- [`templates/public_data_template.yaml`](templates/public_data_template.yaml) — starter template
 
 ## Commands
 
-Implemented commands:
-
 ```bash
-make test
-make demo
-make privacy-scan
-make validate
-make ci
+make test              # run the test suite
+make demo              # generate Andy Barks demo outputs
+make privacy-scan      # scan for prohibited private content
+make schema-check      # validate the public dataset
+make link-check        # validate local Markdown links
+make dependency-check  # verify installed dependencies
+make validate          # run all validation and demo targets
+make ci                # CI alias for full validation
 ```
 
-There is no implemented acquisition CLI in this public slice. The acquisition lifecycle is documented as a framework pattern in [docs/acquisition-workflow.md](docs/acquisition-workflow.md).
-
-See [docs/command-workflow.md](docs/command-workflow.md).
+There is not yet an implemented `/acquire` CLI in this public release. Conversational interviewing and other evidence-acquisition methods are documented as framework patterns in [docs/acquisition-workflow.md](docs/acquisition-workflow.md).
 
 ## Data Model
 
-The public data model includes identity, experience, accomplishments, resume bullets, projects, skills, stories, values, interests, person claims, evidence records, resume profiles, job description metadata, and project visibility.
+The public schema includes:
+
+- identity
+- experience
+- accomplishments
+- reusable resume bullets
+- projects
+- skills
+- stories
+- values and interests
+- evidence records
+- person-model claims
+- resume profiles
+- job-description metadata
+- project visibility
+
+Entities use stable IDs and ID-based relationships so accomplishments, evidence, skills, stories, projects, claims, and generated views remain traceable.
 
 See [docs/data-model.md](docs/data-model.md).
 
-## Evidence And Provenance
+## Evidence and Provenance
 
-Each generated output should be explainable from source records. Evidence status, confidence, and usage cautions are part of the data model rather than afterthoughts.
+Evidence provenance is part of the model, not an annotation added after generation.
+
+The framework can preserve:
+
+- source references
+- evidence type
+- evidence strength
+- confidence
+- review status
+- conflicting records
+- usage cautions
+- links between claims and accomplishments
+
+This allows an output to explain not only *what* it recommends, but *why* the recommendation is supportable.
 
 See [docs/evidence-and-provenance.md](docs/evidence-and-provenance.md).
 
 ## Person-Model Safety
 
-Person-model claims can support role matching, positioning, and interview prep, but resume generation is stricter. Reflection-only claims and explicitly prohibited claims should not become resume bullets.
+Person-model claims can support:
+
+- role and environment matching
+- positioning
+- interview preparation
+- questions to investigate
+- potential misinterpretation risks
+
+Resume generation is deliberately stricter.
+
+Reflection-only claims, preferences, personality descriptions, and explicitly prohibited claims must not become titles, credentials, accomplishments, or resume bullets without appropriate evidence.
 
 See [docs/person-model-safety.md](docs/person-model-safety.md).
 
 ## Privacy
 
-This public repository is designed around synthetic data. Real private career records, application materials, contact details, generated private resumes, and private configuration should stay outside the public dataset.
+This public repository contains synthetic data only.
+
+Keep real career records outside a public clone, including:
+
+- raw resumes and source documents
+- contact information
+- real job descriptions
+- application history
+- generated application materials
+- private interview notes
+- person-model reflections
+- private configuration and calibration
+- graphs derived from a real person's model
+
+The repository includes a privacy scan to help detect accidental leakage, but users remain responsible for reviewing what they commit.
 
 See [docs/privacy-boundaries.md](docs/privacy-boundaries.md).
 
+## Editor and Obsidian Use
+
+Career Intelligence is editor-agnostic. Its source data is stored in plain-text YAML and Markdown, so it can be used with VS Code, Neovim, Obsidian, or another local knowledge workflow.
+
+Obsidian is an optional interface, not a requirement and not the core architecture. A future integration guide may cover vault layout, graph views, generated-note separation, and public/private publishing boundaries.
+
 ## Project Status
 
-Current status: public migration in progress.
+**Version:** `0.1.0`
 
-Implemented in this public worktree:
+The current release includes:
 
-- generic engine slice
-- default public configuration
-- public schemas and templates
-- Andy Barks synthetic dataset
-- deterministic demo workflow
-- generated synthetic demo artifacts
+- generic source-backed reasoning engine
+- public schemas and starter templates
+- configurable public defaults
+- synthetic Andy Barks dataset
+- deterministic match, positioning, prep, resume, and visualization outputs
+- automated privacy scanning
+- schema and Markdown-link validation
+- standalone installation validation
+- 18 passing tests
 
-Not yet complete:
+This is an early public foundation, not a finished career platform. The current emphasis is on a trustworthy data model, explainable reasoning, and safe extension points.
 
-- public documentation review
-- automated privacy and CI safeguards
-- full standalone validation
-- clean public repository initialization
-- final human review
+Likely next areas include:
+
+- guided evidence acquisition
+- additional synthetic career examples
+- richer visualization
+- broader career-domain testing
+- optional editor and Obsidian recipes
+- more configurable reasoning rules
 
 ## Contributing
 
-This repository is not ready for broad contribution yet. The useful contribution shape, once safeguards are complete, will be small, evidence-preserving improvements to schema clarity, reasoning behavior, docs, tests, and synthetic examples.
+Small, evidence-preserving contributions are welcome, especially improvements to:
+
+- schema clarity
+- provenance and safety behavior
+- tests
+- documentation
+- synthetic examples
+- domain-neutral reasoning
+- privacy safeguards
+
+Please keep real personal career data out of issues, pull requests, fixtures, and examples.
 
 ## License
 
-License is not finalized in this migration worktree.
+A software license has not yet been added. Until one is selected, the repository is publicly viewable but should not be treated as licensed for reuse, modification, or redistribution.
