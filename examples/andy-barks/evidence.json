@@ -1,0 +1,23 @@
+[
+  {
+    "id": "e1",
+    "source": "fictional workshop guide",
+    "observation": "Andy created a guide for a learner workshop.",
+    "supports": ["design learning material"],
+    "caution": "Shows one artifact, not organization-wide ownership."
+  },
+  {
+    "id": "e2",
+    "source": "fictional delivery note",
+    "observation": "Andy facilitated the workshop.",
+    "supports": ["design learning material"],
+    "caution": "Does not establish long-term program impact."
+  },
+  {
+    "id": "e3",
+    "source": "fictional revision note",
+    "observation": "Andy changed one activity after participant feedback.",
+    "supports": ["adapt material from feedback"],
+    "caution": "One narrow example."
+  }
+]
