@@ -1,5 +1,7 @@
 # Career Intelligence
 
+[![CI](https://github.com/haleyparks329/career-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/haleyparks329/career-intelligence/actions/workflows/ci.yml)
+
 Career Intelligence is a synthetic case study about evidence-first career reasoning.
 
 It starts with a different question from most job-search tools: what is true about this person, what supports it, what remains uncertain, and what is safe to say for this opportunity?
